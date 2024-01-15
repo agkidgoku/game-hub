@@ -1,4 +1,8 @@
+import placeholder from "../assets/no-image-placeholder-6f3882e0.webp";
+
 const getCroppedImage = (url: string) => {
+  if (!url) return placeholder;
+
   const target = "media/";
 
   // Finding the index of the first occurrence of 'target' in the 'url' string
