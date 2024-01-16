@@ -20,7 +20,7 @@ type Props = {
 
 const GameCard = ({ game }: Props) => {
   return (
-    <Card>
+    <Card height="100%">
       <Image src={getCroppedImage(game.background_image)} />
       <CardBody>
         <HStack justifyContent="space-between" marginBottom={1}>
@@ -28,7 +28,7 @@ const GameCard = ({ game }: Props) => {
             platforms={game.parent_platforms.map(
               (platform) => platform.platform
             )}
-            // .map is an unfortunate must due to how the parent_platfroms are structured in api
+            // .map is an unfortunate must, due to how the parent_platfroms are structured in api
           />
           <CriticScore score={game.metacritic} />
         </HStack>
