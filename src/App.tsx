@@ -50,9 +50,9 @@ function App() {
             <Box marginRight={5}>
               <PlatformSelector
                 selectedPlatform={gameQuery.platform}
-                onSelectPlatform={(platform) =>
-                  setGameQuery({ ...gameQuery, platform })
-                }
+                onSelectPlatform={(platform) => {
+                  setGameQuery({ ...gameQuery, platform });
+                }}
               />
             </Box>
             <SortSelector
