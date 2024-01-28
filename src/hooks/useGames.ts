@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { GameQuery } from "../App";
 import APIClient, { FetchRespose } from "../services/api-client";
 import { Platform } from "./usePlatforms";
@@ -15,22 +15,26 @@ export interface Game {
 const apiClient = new APIClient<Game>("/games");
 
 const useGames = (gameQuery: GameQuery) =>
-  useQuery<FetchRespose<Game>, Error>({
+  useInfiniteQuery<FetchRespose<Game>, Error>({
     queryKey: ["games", gameQuery],
     // When you include gameQuery in the queryKey like ["games", gameQuery],
     // you are making the query key more specific. This means that each different
     // set of gameQuery parameters will be treated as a distinct query. When you
     // change the parameters, React Query sees it as a different query and
     // automatically refetches the data.
-    queryFn: () =>
+    queryFn: ({ pageParam = 1 }) =>
       apiClient.getAll({
         params: {
           genres: gameQuery.genre?.id,
           parent_platforms: gameQuery.platform?.id,
           ordering: gameQuery.sortOrder,
           search: gameQuery.searchText,
+          page: pageParam,
         },
       }),
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.next ? allPages.length + 1 : undefined;
+    },
   });
 
 export default useGames;
