@@ -15,26 +15,23 @@ export interface Game {
 const apiClient = new APIClient<Game>("/games");
 
 const useGames = (gameQuery: GameQuery) =>
-  useInfiniteQuery<FetchResponse<Game>, Error>({
+  useQuery<FetchResponse<Game>, Error>({
     queryKey: ["games", gameQuery],
     // When you include gameQuery in the queryKey like ["games", gameQuery],
     // you are making the query key more specific. This means that each different
     // set of gameQuery parameters will be treated as a distinct query. When you
     // change the parameters, React Query sees it as a different query and
     // automatically refetches the data.
-    queryFn: ({ pageParam = 1 }) =>
+    queryFn: () =>
       apiClient.getAll({
         params: {
           genres: gameQuery.genre?.id,
           parent_platforms: gameQuery.platform?.id,
           ordering: gameQuery.sortOrder,
           search: gameQuery.searchText,
-          page: pageParam,
+          page: gameQuery.page,
         },
       }),
-    getNextPageParam: (lastPage, allPages) => {
-      return lastPage.next ? allPages.length + 1 : undefined;
-    },
   });
 
 export default useGames;

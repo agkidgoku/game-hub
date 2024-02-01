@@ -8,12 +8,14 @@ import PlatformSelector from "./components/PlatformSelector";
 import { Platform } from "./hooks/usePlatforms";
 import SortSelector from "./components/SortSelector";
 import GameHeading from "./components/GameHeading";
+import Pagination from "./components/Pagination";
 
 export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
   sortOrder: string;
   searchText: string;
+  page: number;
 }
 
 function App() {
@@ -64,6 +66,11 @@ function App() {
           </Flex>
         </Box>
         <GameGrid gameQuery={gameQuery} />
+        <Pagination
+          gameQuery={gameQuery}
+          page={gameQuery.page}
+          onSelectPage={(page) => setGameQuery({ ...gameQuery, page })}
+        />
       </GridItem>
     </Grid>
   );
