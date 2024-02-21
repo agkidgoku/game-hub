@@ -1,8 +1,8 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { GameQuery } from "../App";
 import APIClient, { FetchResponse } from "../services/api-client";
 import { Platform } from "./usePlatforms";
 import ms from "ms";
+import useGameQuery from "./store";
 
 export interface Game {
   id: number;
@@ -15,8 +15,9 @@ export interface Game {
 
 const apiClient = new APIClient<Game>("/games");
 
-const useGames = (gameQuery: GameQuery) =>
-  useInfiniteQuery<FetchResponse<Game>, Error>({
+const useGames = () => {
+  const gameQuery = useGameQuery((s) => s.gameQuery);
+  return useInfiniteQuery<FetchResponse<Game>, Error>({
     queryKey: ["games", gameQuery],
     // When you include gameQuery in the queryKey like ["games", gameQuery],
     // you are making the query key more specific. This means that each different
@@ -38,5 +39,6 @@ const useGames = (gameQuery: GameQuery) =>
     },
     staleTime: ms("1d"),
   });
+};
 
 export default useGames;
