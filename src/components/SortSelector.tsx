@@ -9,8 +9,8 @@ const SortSelector = () => {
     { value: "-added", label: "Date Added" },
     { value: "name", label: "Name" },
     { value: "-released", label: "Relase Date" },
-    { value: "-metacritic", label: "Popularity" },
-    { value: "-rating", label: "Avarage Rating" },
+    { value: "-metacritic", label: "Avarage Rating" },
+    { value: "-rating", label: "Popularity" },
   ];
 
   const selectedSortOrder = useGameQuery((s) => s.gameQuery.sortOrder);
