@@ -26,7 +26,7 @@ const GameDetailPage = () => {
   console.log(game);
 
   return (
-    <SimpleGrid columns={{ base: 1, md: 2 }}>
+    <SimpleGrid columns={{ base: 1, md: 2 }} gap={5}>
       <GridItem>
         <Heading>{game.name}</Heading>
         <ExpandableText>{game.description_raw}</ExpandableText>
