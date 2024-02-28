@@ -16,7 +16,7 @@ const ExpandableText = ({ children }: Props) => {
 
   return (
     <>
-      <Text>{showMore ? children : `${summary}. . .`}</Text>
+      <Text>{showMore ? children : `${summary}...`}</Text>
       <Box
         marginTop={2}
         display={"flex"}
