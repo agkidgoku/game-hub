@@ -21,24 +21,26 @@ type Props = {
 
 const GameCard = ({ game }: Props) => {
   return (
-    <Card height="100%">
-      <Image src={getCroppedImage(game.background_image)} />
-      <CardBody>
-        <HStack justifyContent="space-between" marginBottom={1}>
-          <PlatformIconList
-            platforms={game.parent_platforms.map(
-              (platform) => platform.platform
-            )}
-            // .map is an unfortunate must, due to how the parent_platfroms are structured in api
-          />
-          <CriticScore score={game.metacritic} />
-        </HStack>
-        <Heading fontSize="2xl">
-          <Link to={"/games/" + game.slug}>{game.name}</Link>
-          <Emoji rating={game.rating_top} />
-        </Heading>
-      </CardBody>
-    </Card>
+    <Link to={"/games/" + game.slug}>
+      <Card height="100%">
+        <Image src={getCroppedImage(game.background_image)} />
+        <CardBody>
+          <HStack justifyContent="space-between" marginBottom={1}>
+            <PlatformIconList
+              platforms={game.parent_platforms.map(
+                (platform) => platform.platform
+              )}
+              // .map is an unfortunate must, due to how the parent_platfroms are structured in api
+            />
+            <CriticScore score={game.metacritic} />
+          </HStack>
+          <Heading fontSize="2xl">
+            {game.name}
+            <Emoji rating={game.rating_top} />
+          </Heading>
+        </CardBody>
+      </Card>
+    </Link>
   );
 };
 
