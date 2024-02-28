@@ -18,7 +18,7 @@ const PlatformSelector = () => {
         {selectedPlatform?.name || "Platform"}
       </MenuButton>
       <MenuList>
-        {/* <MenuItem onClick={() => onSelectPlatform()}>All</MenuItem> */}
+        <MenuItem onClick={() => setSelectedPlatformId()}>All</MenuItem>
         {data?.results.map((platform) => (
           <MenuItem
             onClick={() => setSelectedPlatformId(platform.id)}

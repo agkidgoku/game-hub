@@ -12,6 +12,7 @@ import useGenres from "../hooks/useGenres";
 import { Genre } from "../entities/Genre";
 import getCroppedImage from "../services/image-url";
 import useGameQuery from "../hooks/store";
+import genres from "../data/genres";
 
 const GenreList = () => {
   const { data, error, isLoading } = useGenres();
@@ -28,6 +29,27 @@ const GenreList = () => {
         Genres
       </Heading>
       <List>
+        <ListItem key={selectedGenreId} paddingY="5px">
+          <HStack>
+            <Image
+              objectFit={"cover"}
+              boxSize="32px"
+              borderRadius={8}
+              src={getCroppedImage(data.results[8].image_background)}
+            />
+            <Button
+              whiteSpace={"normal"}
+              textAlign={"left"}
+              fontWeight={!selectedGenreId ? "bold" : ""}
+              variant="link"
+              fontSize="lg"
+              onClick={() => setSelectedGenre()}
+              color="gray-900"
+            >
+              All Games
+            </Button>
+          </HStack>
+        </ListItem>
         {data?.results.map((genre) => (
           <ListItem key={genre.id} paddingY="5px">
             <HStack>
