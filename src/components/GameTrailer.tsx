@@ -21,6 +21,8 @@ const GameTrailer = ({ gameId }: Props) => {
         style={{ width: "100%", height: "auto" }}
       ></video>
     );
+
+  return null;
 };
 
 export default GameTrailer;
